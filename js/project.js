@@ -5,6 +5,7 @@ var imageContext;
 var imageArray = [];
 var imageIter;
 var subIter;
+var subIterMax;
 
 function init()
 {
@@ -20,6 +21,10 @@ for(; i < 9; i++)
 }
 imageIter = 0;
 subIter = 0;
+subIterMax=3;
+var subButton = document.getElementById("submitButton");
+subButton.addEventListener("click", subClick)
+//subClick();
 //imageContext.drawImage(imageArray[0], 0, 0);
 render();
 }
@@ -28,15 +33,37 @@ function render()
 {
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
     imageContext.drawImage(imageArray[imageIter], 0, 0);
+    if(subIterMax != 0)
+    {
     subIter++
-    if(subIter == 3)
+    if(subIter == subIterMax)
     {
     subIter = 0;
     imageIter++;
+
+    if(imageIter > 8)
+    {
+        imageIter = 0;
+    }
+    }
+    }
+    else
+    {
+    imageIter++;
+
     if(imageIter > 8)
     {
         imageIter = 0;
     }
     }
     requestAnimationFrame(render);
-    }
+}
+function subClick()
+{
+    //event.preventDefault();
+    subIterMax = document.getElementById("subIterMaxVal").value;
+}
+/*
+
+document.getElementById("submitButton").onclick = function(){
+*/
