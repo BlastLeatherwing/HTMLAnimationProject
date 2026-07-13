@@ -13,12 +13,14 @@
     </canvas>
     <br>
     <label for="canvWid">Width:</label>
-    <input type="number" id="canvWid">
+    <input type="number" id="canvWid" value = "300">
     <label for="canvHei">Height:</label>
-    <input type="number" id="canvWid">
+    <input type="number" id="canvHei" value = "200">
     <label for="subIterMax">Sub Iteration Max:</label>
-    <input type="number" id="subIterMaxVal" min="0" max="60" value="3">
+    <input type="number" id="subIterMaxVal" min="0" value="3">
     <button type="button" id="submitButton">submit</button>
+    <br>The function requestAnimationFrame runs at 60 frames per second. Setting the SubIterationMax variable to 0 will do that.
+    <br>Setting it to 3 will have it run at 15 frames per second.
   <script>
   init();
   </script>

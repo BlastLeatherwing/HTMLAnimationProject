@@ -6,6 +6,8 @@ var imageArray = [];
 var imageIter;
 var subIter;
 var subIterMax;
+var canvWid;
+var canvHei;
 
 function init()
 {
@@ -22,8 +24,10 @@ for(; i < 9; i++)
 imageIter = 0;
 subIter = 0;
 subIterMax=3;
+canvWid = 300;
+canvHei = 200;
 var subButton = document.getElementById("submitButton");
-subButton.addEventListener("click", subClick)
+subButton.addEventListener("click", subClick);
 //subClick();
 //imageContext.drawImage(imageArray[0], 0, 0);
 render();
@@ -62,6 +66,10 @@ function subClick()
 {
     //event.preventDefault();
     subIterMax = document.getElementById("subIterMaxVal").value;
+    canvWid = document.getElementById("canvWid").value;
+    imageCanvas.width = canvWid;
+    canvHei = document.getElementById("canvHei").value;
+    imageCanvas.height = canvHei;
 }
 /*
 
