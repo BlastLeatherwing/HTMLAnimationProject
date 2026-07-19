@@ -8,6 +8,7 @@ var subIter;
 var subIterMax;
 var canvWid;
 var canvHei;
+var clearOnSet;
 
 function init()
 {
@@ -70,6 +71,12 @@ function subClick()
     imageCanvas.width = canvWid;
     canvHei = document.getElementById("canvHei").value;
     imageCanvas.height = canvHei;
+    clearOnSet = document.getElementById("clearSub").checked
+    if(clearOnSet)
+    {
+    subIter = 0;
+    }
+
 }
 /*
 
