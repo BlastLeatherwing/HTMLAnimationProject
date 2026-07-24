@@ -75,7 +75,12 @@ function render()
 function subClick()
 {
     //event.preventDefault();
+    let tempAnimSelect = document.getElementById("AnimSelect").value;
+    if(AnimSelect != tempAnimSelect)
+    {
     AnimSelect = document.getElementById("AnimSelect").value;
+    imageIter = 0;
+    }
     subIterMax = document.getElementById("subIterMaxVal").value;
     canvWid = document.getElementById("canvWid").value;
     imageCanvas.width = canvWid;
