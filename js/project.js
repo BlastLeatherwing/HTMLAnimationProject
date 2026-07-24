@@ -2,7 +2,7 @@
 
 var imageCanvas;
 var imageContext;
-var imageArray = [[],[],[],[]];
+var imageArray = [[],[],[],[],[]];
 var imageIter;
 var subIter;
 var subIterMax;
@@ -51,6 +51,17 @@ for(i=1; i < 17; i++)
     let testString0 = testString+(i)+".png";
     imageArray[3][i].src = testString0;
 }
+imageArray[4][0] = new Image();
+imageArray[4][0] = imageArray[1][4];
+for(i=1; i < 5; i++)
+{
+    imageArray[4][i] = new Image();
+    let testString = "./assets/SamAttackFrame";
+    let testString0 = testString+(i)+".png";
+    imageArray[4][i].src = testString0;
+}
+imageArray[4][5] = new Image();
+imageArray[4][5] = imageArray[1][4];
 imageIter = 0;
 subIter = 0;
 subIterMax=3;
