@@ -14,6 +14,7 @@ var groundOffset;
 var clearOnSet;
 var AnimSelect;
 var drawGround;
+var groundColor;
 
 function init()
 {
@@ -61,7 +62,14 @@ function render()
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
     if (drawGround)
     {
-        imageContext.fillStyle = '#0a6666';
+        if(typeof groundColor != undefined)
+        {
+            imageContext.fillStyle = groundColor;
+        }
+        else
+        {
+            imageContext.fillStyle = '#0a6666';
+        }
         imageContext.fillRect(0, yOffset+groundOffset, imageCanvas.width, 10);
     }
     imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
@@ -113,6 +121,7 @@ function subClick()
     subIter = 0;
     }
     drawGround = document.getElementById("drawGround").checked;
+    groundColor = document.getElementById("groundColor").value;
 
 }
 /*

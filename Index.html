@@ -22,6 +22,8 @@
     <input type="number" id="yOffset" value = "0">
     <label for="groundOffset"> Ground Offset</label>
     <input type="number" id="groundOffset" value = "0">
+    <label for="groundColor"> Ground Color</label>
+    <input type="color" id="groundColor" value = "#0a6666">
     <br>
     <label for="subIterMax">Sub Iteration Max:</label>
     <input type="number" id="subIterMaxVal" min="0" value="3">
@@ -31,7 +33,12 @@
     <br>The function requestAnimationFrame runs at 60 frames per second. Setting the SubIterationMax variable to 0 will do that.
     <br>Setting it to 3 will have it run at 15 frames per second.
     <br>This sets which animation is viewed.
-    <br><input type="number" id="AnimSelect" min="0" value="0" max="2">
+    <br>
+    <select name = "AnimSelectDrop" id="AnimSelect">
+    <option = value = "0" selected> Blast Flying Animation</option>
+    <option = value = "1"> Sam Walking Animation</option>
+    <option = value = "2"> Sam Turning Animation</option>
+    </select>
   <script>
   init();
   </script>
