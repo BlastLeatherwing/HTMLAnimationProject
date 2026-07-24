@@ -2,7 +2,7 @@
 
 var imageCanvas;
 var imageContext;
-var imageArray = [[],[]];
+var imageArray = [[],[],[]];
 var imageIter;
 var subIter;
 var subIterMax;
@@ -10,8 +10,10 @@ var canvWid;
 var canvHei;
 var xOffset;
 var yOffset;
+var groundOffset;
 var clearOnSet;
 var AnimSelect;
+var drawGround;
 
 function init()
 {
@@ -32,6 +34,13 @@ for(i=0; i < 5; i++)
     let testString0 = testString+(i+1)+".png";
     imageArray[1][i].src = testString0;
 }
+for(i=0; i < 8; i++)
+{
+    imageArray[2][i] = new Image();
+    let testString = "./assets/SamTurnFrame";
+    let testString0 = testString+(i+1)+".png";
+    imageArray[2][i].src = testString0;
+}
 imageIter = 0;
 subIter = 0;
 subIterMax=3;
@@ -50,6 +59,11 @@ render();
 function render()
 {
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
+    if (drawGround)
+    {
+        imageContext.fillStyle = '#0a6666';
+        imageContext.fillRect(0, yOffset+groundOffset, imageCanvas.width, 10);
+    }
     imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
     if(subIterMax != 0)
     {
@@ -92,11 +106,13 @@ function subClick()
     imageCanvas.height = canvHei;
     xOffset = document.getElementById("xOffset").value;
     yOffset = document.getElementById("yOffset").value;
-    clearOnSet = document.getElementById("clearSub").checked
+    groundOffset = document.getElementById("groundOffset").value;
+    clearOnSet = document.getElementById("clearSub").checked;
     if(clearOnSet)
     {
     subIter = 0;
     }
+    drawGround = document.getElementById("drawGround").checked;
 
 }
 /*
