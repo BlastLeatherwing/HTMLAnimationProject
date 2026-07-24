@@ -2,7 +2,7 @@
 
 var imageCanvas;
 var imageContext;
-var imageArray = [[],[],[],[],[]];
+var imageArray = [[],[],[],[],[],[]];
 var imageIter;
 var subIter;
 var subIterMax;
@@ -62,6 +62,15 @@ for(i=1; i < 5; i++)
 }
 imageArray[4][5] = new Image();
 imageArray[4][5] = imageArray[1][4];
+for(i=0; i < 10; i++)
+{
+    imageArray[5][i] = new Image();
+    let testString = "./assets/SamJumpFrame";
+    let testString0 = testString+(i+1)+".png";
+    imageArray[5][i].src = testString0;
+}
+imageArray[5][10] = new Image();
+imageArray[5][10] = imageArray[5][0];
 imageIter = 0;
 subIter = 0;
 subIterMax=3;
