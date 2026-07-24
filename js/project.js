@@ -2,13 +2,14 @@
 
 var imageCanvas;
 var imageContext;
-var imageArray = [];
+var imageArray = [[],[]];
 var imageIter;
 var subIter;
 var subIterMax;
 var canvWid;
 var canvHei;
 var clearOnSet;
+var AnimSelect;
 
 function init()
 {
@@ -17,16 +18,24 @@ imageContext = imageCanvas.getContext("2d");
 let i = 0;
 for(; i < 9; i++)
 {
-    imageArray[i] = new Image();
+    imageArray[0][i] = new Image();
     let testString = "./assets/BlastFlightFrame";
     let testString0 = testString+(i+1)+".png";
-    imageArray[i].src = testString0;
+    imageArray[0][i].src = testString0;
+}
+for(i=0; i < 5; i++)
+{
+    imageArray[1][i] = new Image();
+    let testString = "./assets/SamWalkFrame";
+    let testString0 = testString+(i+1)+".png";
+    imageArray[1][i].src = testString0;
 }
 imageIter = 0;
 subIter = 0;
 subIterMax=3;
 canvWid = 300;
 canvHei = 200;
+AnimSelect = 0;
 var subButton = document.getElementById("submitButton");
 subButton.addEventListener("click", subClick);
 //subClick();
@@ -37,7 +46,7 @@ render();
 function render()
 {
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
-    imageContext.drawImage(imageArray[imageIter], 0, 0);
+    imageContext.drawImage(imageArray[AnimSelect][imageIter], 0, 0);
     if(subIterMax != 0)
     {
     subIter++
@@ -46,7 +55,7 @@ function render()
     subIter = 0;
     imageIter++;
 
-    if(imageIter > 8)
+    if(imageIter > (imageArray[AnimSelect].length)-1)
     {
         imageIter = 0;
     }
@@ -56,7 +65,7 @@ function render()
     {
     imageIter++;
 
-    if(imageIter > 8)
+    if(imageIter > (imageArray[AnimSelect].length)-1)
     {
         imageIter = 0;
     }
@@ -66,6 +75,7 @@ function render()
 function subClick()
 {
     //event.preventDefault();
+    AnimSelect = document.getElementById("AnimSelect").value;
     subIterMax = document.getElementById("subIterMaxVal").value;
     canvWid = document.getElementById("canvWid").value;
     imageCanvas.width = canvWid;
