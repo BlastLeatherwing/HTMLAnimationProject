@@ -8,6 +8,8 @@ var subIter;
 var subIterMax;
 var canvWid;
 var canvHei;
+var xOffset;
+var yOffset;
 var clearOnSet;
 var AnimSelect;
 
@@ -35,6 +37,8 @@ subIter = 0;
 subIterMax=3;
 canvWid = 300;
 canvHei = 200;
+xOffset = 0;
+yOffset = 0;
 AnimSelect = 0;
 var subButton = document.getElementById("submitButton");
 subButton.addEventListener("click", subClick);
@@ -46,7 +50,7 @@ render();
 function render()
 {
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
-    imageContext.drawImage(imageArray[AnimSelect][imageIter], 0, 0);
+    imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
     if(subIterMax != 0)
     {
     subIter++
@@ -86,6 +90,8 @@ function subClick()
     imageCanvas.width = canvWid;
     canvHei = document.getElementById("canvHei").value;
     imageCanvas.height = canvHei;
+    xOffset = document.getElementById("xOffset").value;
+    yOffset = document.getElementById("yOffset").value;
     clearOnSet = document.getElementById("clearSub").checked
     if(clearOnSet)
     {
