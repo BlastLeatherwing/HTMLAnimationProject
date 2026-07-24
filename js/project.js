@@ -2,7 +2,7 @@
 
 var imageCanvas;
 var imageContext;
-var imageArray = [[],[],[]];
+var imageArray = [[],[],[],[]];
 var imageIter;
 var subIter;
 var subIterMax;
@@ -41,6 +41,15 @@ for(i=0; i < 8; i++)
     let testString = "./assets/SamTurnFrame";
     let testString0 = testString+(i+1)+".png";
     imageArray[2][i].src = testString0;
+}
+imageArray[3][0] = new Image();
+imageArray[3][0] = imageArray[1][0];
+for(i=1; i < 17; i++)
+{
+    imageArray[3][i] = new Image();
+    let testString = "./assets/SamDigFrame";
+    let testString0 = testString+(i)+".png";
+    imageArray[3][i].src = testString0;
 }
 imageIter = 0;
 subIter = 0;
