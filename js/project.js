@@ -2,7 +2,7 @@
 
 var imageCanvas;
 var imageContext;
-var imageArray = [[],[],[],[],[],[]];
+var imageArray = [[],[],[],[],[],[],[]];
 var imageIter;
 var subIter;
 var subIterMax;
@@ -74,6 +74,15 @@ for(i=0; i < 10; i++)
 }
 imageArray[5][10] = new Image();
 imageArray[5][10] = imageArray[5][0];
+imageArray[6][0] = new Image();
+imageArray[6][0] = imageArray[1][4];
+for(i=1; i < 11; i++)
+{
+    imageArray[6][i] = new Image();
+    let testString = "./assets/SamIdleFrame";
+    let testString0 = testString+(i)+".png";
+    imageArray[6][i].src = testString0;
+}
 imageIter = 0;
 subIter = 0;
 subIterMax=3;
@@ -179,7 +188,6 @@ function subClick()
     XFlipped = document.getElementById("xFlip").checked;
     groundColor = document.getElementById("groundColor").value;
     ImgScale = document.getElementById("ImageScale").value;
-
 }
 /*
 
