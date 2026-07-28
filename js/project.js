@@ -15,11 +15,14 @@ var clearOnSet;
 var AnimSelect;
 var drawGround;
 var groundColor;
+var ImgScale;
+var XFlipped;
 
 function init()
 {
 imageCanvas = document.getElementById("imgCanvas");
 imageContext = imageCanvas.getContext("2d");
+imageContext.imageSmoothingEnabled = false;
 let i = 0;
 for(; i < 9; i++)
 {
@@ -79,6 +82,8 @@ canvHei = 200;
 xOffset = 0;
 yOffset = 0;
 AnimSelect = 0;
+ImgScale = 1;
+XFlipped = false;
 var subButton = document.getElementById("submitButton");
 subButton.addEventListener("click", subClick);
 //subClick();
@@ -88,7 +93,26 @@ render();
 // handleClick
 function render()
 {
+    //imageContxt.save();
+    imageContext.imageSmoothingEnabled = false;
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
+    imageContext.save();
+    let origXoffSet = xOffset;
+    let xScale = ImgScale;
+    if (XFlipped == true)
+    {
+    xScale = -1 * ImgScale;
+    xOffset = (-1 * xOffset)-(imageArray[AnimSelect][imageIter].width);
+    if (xOffset >= 0)
+    {
+        xOffset = (-1 * xOffset)-(imageArray[AnimSelect][imageIter].width);//Is this a dumb way to stop it from oscillating?
+    }
+    }
+    else
+    {
+    xScale = ImgScale;
+    }
+    imageContext.scale(xScale, ImgScale);
     if (drawGround)
     {
         if(typeof groundColor != undefined)
@@ -99,9 +123,10 @@ function render()
         {
             imageContext.fillStyle = '#0a6666';
         }
-        imageContext.fillRect(0, yOffset+groundOffset, imageCanvas.width, 10);
+        imageContext.fillRect(xOffset, yOffset+groundOffset, imageCanvas.width, 10);
     }
     imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
+    xOffSet = origXoffSet;
     if(subIterMax != 0)
     {
     subIter++
@@ -125,6 +150,7 @@ function render()
         imageIter = 0;
     }
     }
+    imageContext.restore();
     requestAnimationFrame(render);
 }
 function subClick()
@@ -150,7 +176,9 @@ function subClick()
     subIter = 0;
     }
     drawGround = document.getElementById("drawGround").checked;
+    XFlipped = document.getElementById("xFlip").checked;
     groundColor = document.getElementById("groundColor").value;
+    ImgScale = document.getElementById("ImageScale").value;
 
 }
 /*
