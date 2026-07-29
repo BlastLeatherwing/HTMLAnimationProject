@@ -17,12 +17,19 @@ var drawGround;
 var groundColor;
 var ImgScale;
 var XFlipped;
+var BlastShadowColor;
+var SamShadowColor;
+var drawShadows;
 
 function init()
 {
 imageCanvas = document.getElementById("imgCanvas");
 imageContext = imageCanvas.getContext("2d");
 imageContext.imageSmoothingEnabled = false;
+imageContext.shadowColor = "rgb(0 153 64 / 100%)";
+imageContext.shadowBlur = 0;
+imageContext.shadowOffsetX = 1;
+imageContext.shadowOffsetY = 1;
 let i = 0;
 for(; i < 9; i++)
 {
@@ -95,6 +102,9 @@ ImgScale = 1;
 XFlipped = false;
 var subButton = document.getElementById("submitButton");
 subButton.addEventListener("click", subClick);
+BlastShadowColor = "rgb(0 153 64 / 100%)";
+SamShadowColor = "rgb(18 10 4 / 100%)";
+drawShadows = true;
 //subClick();
 //imageContext.drawImage(imageArray[0], 0, 0);
 render();
@@ -105,6 +115,26 @@ function render()
     //imageContxt.save();
     imageContext.imageSmoothingEnabled = false;
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
+    if(drawShadows)
+        {
+            if(AnimSelect == 0)//So far, this is the only animation of Blast, and all the others are Sam.
+            {
+                imageContext.shadowColor = BlastShadowColor;
+            }
+            else
+            {
+                imageContext.shadowColor = SamShadowColor;
+            }
+
+        imageContext.shadowBlur = 0;
+        imageContext.shadowOffsetX = ImgScale;
+        imageContext.shadowOffsetY = ImgScale;
+        }
+        else
+        {
+            imageContext.shadowOffsetX = 0;
+            imageContext.shadowOffsetY = 0;
+        }
     imageContext.save();
     let origXoffSet = xOffset;
     let xScale = ImgScale;
@@ -113,52 +143,58 @@ function render()
     xScale = -1 * ImgScale;
     xOffset = (-1 * xOffset)-(imageArray[AnimSelect][imageIter].width);
     if (xOffset >= 0)
-    {
-        xOffset = (-1 * xOffset)-(imageArray[AnimSelect][imageIter].width);//Is this a dumb way to stop it from oscillating?
-    }
+        {
+            xOffset = (-1 * xOffset)-(imageArray[AnimSelect][imageIter].width);//Is this a dumb way to stop it from oscillating?
+        }
     }
     else
-    {
-    xScale = ImgScale;
-    }
+        {
+        xScale = ImgScale;
+        }
     imageContext.scale(xScale, ImgScale);
     if (drawGround)
     {
         if(typeof groundColor != undefined)
-        {
-            imageContext.fillStyle = groundColor;
-        }
+            {
+                imageContext.fillStyle = groundColor;
+            }
         else
-        {
-            imageContext.fillStyle = '#0a6666';
-        }
+            {
+                imageContext.fillStyle = '#0a6666';
+            }
         imageContext.fillRect(xOffset, yOffset+groundOffset, imageCanvas.width, 10);
     }
     imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
+    if(drawShadows)
+    {
+        imageContext.shadowOffsetX = -1*ImgScale;
+        imageContext.shadowOffsetY = -1*ImgScale;
+        imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
+    }
     xOffSet = origXoffSet;
     if(subIterMax != 0)
     {
     subIter++
     if(subIter == subIterMax)
-    {
-    subIter = 0;
-    imageIter++;
+        {
+        subIter = 0;
+        imageIter++;
 
-    if(imageIter > (imageArray[AnimSelect].length)-1)
-    {
-        imageIter = 0;
-    }
-    }
+            if(imageIter > (imageArray[AnimSelect].length)-1)
+            {
+                imageIter = 0;
+            }
+        }
     }
     else
-    {
-    imageIter++;
+        {
+        imageIter++;
 
-    if(imageIter > (imageArray[AnimSelect].length)-1)
-    {
-        imageIter = 0;
-    }
-    }
+        if(imageIter > (imageArray[AnimSelect].length)-1)
+            {
+                imageIter = 0;
+            }
+        }
     imageContext.restore();
     requestAnimationFrame(render);
 }
@@ -167,10 +203,10 @@ function subClick()
     //event.preventDefault();
     let tempAnimSelect = document.getElementById("AnimSelect").value;
     if(AnimSelect != tempAnimSelect)
-    {
-    AnimSelect = document.getElementById("AnimSelect").value;
-    imageIter = 0;
-    }
+        {
+        AnimSelect = document.getElementById("AnimSelect").value;
+        imageIter = 0;
+        }
     subIterMax = document.getElementById("subIterMaxVal").value;
     canvWid = document.getElementById("canvWid").value;
     imageCanvas.width = canvWid;
@@ -180,14 +216,15 @@ function subClick()
     yOffset = document.getElementById("yOffset").value;
     groundOffset = document.getElementById("groundOffset").value;
     clearOnSet = document.getElementById("clearSub").checked;
-    if(clearOnSet)
-    {
-    subIter = 0;
-    }
+        if(clearOnSet)
+        {
+        subIter = 0;
+        }
     drawGround = document.getElementById("drawGround").checked;
     XFlipped = document.getElementById("xFlip").checked;
     groundColor = document.getElementById("groundColor").value;
     ImgScale = document.getElementById("ImageScale").value;
+    drawShadows = document.getElementById("Shadows").checked;
 }
 /*
 
