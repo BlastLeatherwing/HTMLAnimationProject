@@ -170,6 +170,12 @@ function render()
         imageContext.shadowOffsetX = -1*ImgScale;
         imageContext.shadowOffsetY = -1*ImgScale;
         imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
+        imageContext.shadowOffsetX = ImgScale;
+        imageContext.shadowOffsetY = -1*ImgScale;
+        imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
+        imageContext.shadowOffsetX = -1*ImgScale;
+        imageContext.shadowOffsetY = ImgScale;
+        imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
     }
     xOffSet = origXoffSet;
     if(subIterMax != 0)
