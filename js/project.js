@@ -127,7 +127,7 @@ function render()
             }
 
         imageContext.shadowBlur = 0;
-        imageContext.shadowOffsetX = ImgScale;
+        imageContext.shadowOffsetX = 0;
         imageContext.shadowOffsetY = ImgScale;
         }
         else
@@ -167,14 +167,14 @@ function render()
     imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
     if(drawShadows)
     {
-        imageContext.shadowOffsetX = -1*ImgScale;
+        imageContext.shadowOffsetX = 0;
         imageContext.shadowOffsetY = -1*ImgScale;
         imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
         imageContext.shadowOffsetX = ImgScale;
-        imageContext.shadowOffsetY = -1*ImgScale;
+        imageContext.shadowOffsetY = 0;
         imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
         imageContext.shadowOffsetX = -1*ImgScale;
-        imageContext.shadowOffsetY = ImgScale;
+        imageContext.shadowOffsetY = 0;
         imageContext.drawImage(imageArray[AnimSelect][imageIter], xOffset, yOffset);
     }
     xOffSet = origXoffSet;
