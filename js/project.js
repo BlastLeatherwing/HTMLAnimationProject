@@ -2,7 +2,7 @@
 
 var imageCanvas;
 var imageContext;
-var imageArray = [[],[],[],[],[],[],[]];
+var imageArray = [[],[],[],[],[],[],[],[]];
 var imageIter;
 var subIter;
 var subIterMax;
@@ -90,6 +90,13 @@ for(i=1; i < 11; i++)
     let testString0 = testString+(i)+".png";
     imageArray[6][i].src = testString0;
 }
+for(i=0; i < 6; i++)
+{
+    imageArray[7][i] = new Image();
+    let testString = "./assets/BlastCrawlFrame";
+    let testString0 = testString+(i+1)+".png";
+    imageArray[7][i].src = testString0;
+}
 imageIter = 0;
 subIter = 0;
 subIterMax=3;
@@ -117,7 +124,7 @@ function render()
     imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
     if(drawShadows)
         {
-            if(AnimSelect == 0)//So far, this is the only animation of Blast, and all the others are Sam.
+            if(AnimSelect == 0 || AnimSelect == 7)//Should I move the number of the crawling animation to later so all of Sam's get grouped together?'
             {
                 imageContext.shadowColor = BlastShadowColor;
             }
